@@ -23,41 +23,96 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
+/* --- Premium Preloader --- */
+#preloader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content h1 {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+.gold-and {
+    color: var(--accent-color);
+    font-size: 3rem;
+}
+
+.loading-line {
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    margin: 10px auto 0;
+    animation: loadingLine 1.5s ease forwards;
+}
+
+@keyframes loadingLine {
+    to { width: 100%; }
+}
+
 /* --- Hero Section & Bulletproof Photo Background --- */
 .hero {
     min-height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative; 
     
-    /* Fallback color just in case */
     background-color: var(--primary-color); 
     
-    /* Dark overlay (0.6 opacity) + the photo */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpg');
+    /* UPDATED: Covers the whole frame, focused on the top 15% (head to waist) */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpeg');
     background-size: cover;
-    
-    /* Anchors to the top to protect faces */
-    background-position: center top; 
+    background-position: center 15%; 
     background-repeat: no-repeat;
     
-    padding: 60px 20px;
+    padding: 60px 20px 100px 20px; 
     box-sizing: border-box;
 }
 
-/* Make sure text on the image is white and readable */
-.hero h1, 
-.hero h3, 
-.person .full-name, 
-.person .parents, 
-.person .address {
+/* Top Wave Divider */
+.custom-shape-divider-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 70px;
+}
+
+.custom-shape-divider-bottom .shape-fill {
+    fill: var(--bg-color); /* Perfectly matches the countdown section */
+}
+
+/* Hero Text Styling */
+.hero h1, .hero h3, .person .full-name, .person .parents, .person .address {
     color: #ffffff;
     text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
-/* Keep the 'And' symbol and Date in gold */
-.and-symbol h2, 
-.hero .date {
+.and-symbol h2, .hero .date {
     color: var(--accent-color);
     text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
@@ -84,50 +139,40 @@ h1, h2, h3 {
     }
 }
 
-.person h1 {
-    font-size: 4rem;
-    margin: 0 0 10px 0;
+.person h1 { font-size: 4rem; margin: 0 0 10px 0; }
+.person .full-name { font-weight: 700; font-size: 1.2rem; margin: 5px 0; text-transform: uppercase; letter-spacing: 1px; }
+.person .parents, .person .address { font-size: 0.95rem; margin: 3px 0; opacity: 0.9; }
+.and-symbol h2 { font-size: 3rem; margin: 0; }
+.hero .date { font-size: 1.4rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; margin-top: 30px; }
+
+/* --- Elegant Gold Section Dividers --- */
+.section-divider {
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--bg-color), #ffffff);
+    line-height: 0;
+    display: block;
 }
 
-.person .full-name {
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin: 5px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.person .parents, .person .address {
-    font-size: 0.95rem;
-    margin: 3px 0;
-    opacity: 0.9;
-}
-
-.and-symbol h2 {
-    font-size: 3rem;
-    margin: 0;
-}
-
-.hero .date {
-    font-size: 1.4rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 30px;
+.section-divider svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 /* --- Layouts for Lower Sections --- */
-.countdown-section, .details-section {
-    padding: 80px 20px;
-    background-color: #fff;
+.countdown-section {
+    padding: 60px 20px 80px 20px;
+    background-color: var(--bg-color); 
+}
+
+.details-section {
+    padding: 40px 20px 80px 20px;
+    background-color: #ffffff; 
 }
 
 .countdown-section h2, .details-section h2, .detail-card h3 {
     color: var(--primary-color);
-}
-
-.details-section { 
-    background-color: var(--bg-color); 
 }
 
 .countdown-container, .details-grid {
@@ -154,45 +199,41 @@ h1, h2, h3 {
 
 .detail-card {
     border-top: 4px solid var(--accent-color);
-    width: 320px;
+    width: 340px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.time-box span {
-    font-size: 3rem;
-    font-family: 'Playfair Display', serif;
-    display: block;
+.time-box span { font-size: 3rem; font-family: 'Playfair Display', serif; display: block; }
+.time-box p { margin: 5px 0 0 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+
+/* --- Button Group Styling --- */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.time-box p {
-    margin: 5px 0 0 0;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.8;
-}
-
-/* --- Map Button Styling --- */
-.map-button {
+.action-button {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 25px;
-    background-color: var(--primary-color);
+    padding: 10px 20px;
     color: #fff;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 25px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-.map-button:hover {
-    background-color: var(--accent-color);
-    transform: scale(1.05);
-}
+.map-btn { background-color: var(--primary-color); }
+.map-btn:hover { background-color: #1a252f; transform: translateY(-3px); }
+
+.cal-btn { background-color: var(--accent-color); }
+.cal-btn:hover { background-color: #bfa133; transform: translateY(-3px); }
 
 /* --- Animations & Dynamics --- */
 .hover-lift:hover {
@@ -200,14 +241,8 @@ h1, h2, h3 {
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
-.fade-in-down {
-    animation: fadeInDown 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-.fade-in-up {
-    opacity: 0;
-    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
+.fade-in-down { animation: fadeInDown 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.fade-in-up { opacity: 0; animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 
 .hidden {
     opacity: 0;
@@ -215,10 +250,7 @@ h1, h2, h3 {
     transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+.show { opacity: 1; transform: translateY(0); }
 
 .delay-1 { animation-delay: 0.2s; transition-delay: 0.1s; }
 .delay-2 { animation-delay: 0.4s; transition-delay: 0.2s; }
