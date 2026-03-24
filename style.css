@@ -40,17 +40,8 @@ h1, h2, h3 {
     visibility: hidden;
 }
 
-.loader-content h1 {
-    font-size: 4rem;
-    color: var(--primary-color);
-    margin: 0;
-    letter-spacing: 5px;
-}
-
-.gold-and {
-    color: var(--accent-color);
-    font-size: 3rem;
-}
+.loader-content h1 { font-size: 4rem; color: var(--primary-color); margin: 0; letter-spacing: 5px; }
+.gold-and { color: var(--accent-color); font-size: 3rem; }
 
 .loading-line {
     width: 0;
@@ -60,11 +51,9 @@ h1, h2, h3 {
     animation: loadingLine 1.5s ease forwards;
 }
 
-@keyframes loadingLine {
-    to { width: 100%; }
-}
+@keyframes loadingLine { to { width: 100%; } }
 
-/* --- Hero Section & Bulletproof Photo Background --- */
+/* --- Hero Section & Background Image --- */
 .hero {
     min-height: 100vh; 
     display: flex;
@@ -74,14 +63,25 @@ h1, h2, h3 {
     
     background-color: var(--primary-color); 
     
-    /* UPDATED: Covers the whole frame, focused on the top 15% (head to waist) */
+    /* Using couple.jpeg exactly as you uploaded it */
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpeg');
+    
+    /* Cover works perfectly on laptop to crop the legs */
     background-size: cover;
-    background-position: center 15%; 
+    background-position: center top; 
     background-repeat: no-repeat;
     
     padding: 60px 20px 100px 20px; 
     box-sizing: border-box;
+}
+
+/* --- THE MOBILE ZOOM FIX --- */
+/* This forces the phone to zoom in, matching the laptop's head-to-waist crop */
+@media (max-width: 768px) {
+    .hero {
+        background-size: 180% auto; 
+        background-position: center top;
+    }
 }
 
 /* Top Wave Divider */
@@ -95,16 +95,8 @@ h1, h2, h3 {
     transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 70px;
-}
-
-.custom-shape-divider-bottom .shape-fill {
-    fill: var(--bg-color); /* Perfectly matches the countdown section */
-}
+.custom-shape-divider-bottom svg { position: relative; display: block; width: calc(100% + 1.3px); height: 70px; }
+.custom-shape-divider-bottom .shape-fill { fill: var(--bg-color); }
 
 /* Hero Text Styling */
 .hero h1, .hero h3, .person .full-name, .person .parents, .person .address {
@@ -117,26 +109,13 @@ h1, h2, h3 {
     text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
-.hero h3 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
+.hero h3 { font-size: 1.2rem; margin-bottom: 20px; }
 
 /* --- Couple Section Formatting --- */
-.couple-section {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin: 40px 0;
-}
+.couple-section { display: flex; flex-direction: column; gap: 30px; margin: 40px 0; }
 
 @media (min-width: 768px) {
-    .couple-section {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 50px;
-    }
+    .couple-section { flex-direction: row; align-items: center; justify-content: center; gap: 50px; }
 }
 
 .person h1 { font-size: 4rem; margin: 0 0 10px 0; }
@@ -154,34 +133,15 @@ h1, h2, h3 {
     display: block;
 }
 
-.section-divider svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
+.section-divider svg { width: 100%; height: 100%; display: block; }
 
 /* --- Layouts for Lower Sections --- */
-.countdown-section {
-    padding: 60px 20px 80px 20px;
-    background-color: var(--bg-color); 
-}
+.countdown-section { padding: 60px 20px 80px 20px; background-color: var(--bg-color); }
+.details-section { padding: 40px 20px 80px 20px; background-color: #ffffff; }
 
-.details-section {
-    padding: 40px 20px 80px 20px;
-    background-color: #ffffff; 
-}
+.countdown-section h2, .details-section h2, .detail-card h3 { color: var(--primary-color); }
 
-.countdown-section h2, .details-section h2, .detail-card h3 {
-    color: var(--primary-color);
-}
-
-.countdown-container, .details-grid {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
+.countdown-container, .details-grid { display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; }
 
 .time-box, .detail-card {
     background: #fff;
@@ -191,31 +151,14 @@ h1, h2, h3 {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.time-box {
-    background: var(--primary-color);
-    color: #fff;
-    min-width: 90px;
-}
-
-.detail-card {
-    border-top: 4px solid var(--accent-color);
-    width: 340px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.time-box { background: var(--primary-color); color: #fff; min-width: 90px; }
+.detail-card { border-top: 4px solid var(--accent-color); width: 340px; display: flex; flex-direction: column; align-items: center; }
 
 .time-box span { font-size: 3rem; font-family: 'Playfair Display', serif; display: block; }
 .time-box p { margin: 5px 0 0 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
 
 /* --- Button Group Styling --- */
-.button-group {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+.button-group { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; justify-content: center; }
 
 .action-button {
     display: inline-block;
@@ -236,32 +179,15 @@ h1, h2, h3 {
 .cal-btn:hover { background-color: #bfa133; transform: translateY(-3px); }
 
 /* --- Animations & Dynamics --- */
-.hover-lift:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
+.hover-lift:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 .fade-in-down { animation: fadeInDown 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 .fade-in-up { opacity: 0; animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
-
-.hidden {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
+.hidden { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .show { opacity: 1; transform: translateY(0); }
 
 .delay-1 { animation-delay: 0.2s; transition-delay: 0.1s; }
 .delay-2 { animation-delay: 0.4s; transition-delay: 0.2s; }
 .delay-3 { animation-delay: 0.6s; transition-delay: 0.3s; }
 
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
