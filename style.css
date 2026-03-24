@@ -62,26 +62,13 @@ h1, h2, h3 {
     position: relative; 
     
     background-color: var(--primary-color); 
-    
-    /* Using couple.jpeg exactly as you uploaded it */
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpeg');
-    
-    /* Cover works perfectly on laptop to crop the legs */
     background-size: cover;
     background-position: center top; 
     background-repeat: no-repeat;
     
     padding: 60px 20px 100px 20px; 
     box-sizing: border-box;
-}
-
-/* --- THE MOBILE ZOOM FIX --- */
-/* This forces the phone to zoom in, matching the laptop's head-to-waist crop */
-@media (max-width: 768px) {
-    .hero {
-        background-size: 180% auto; 
-        background-position: center top;
-    }
 }
 
 /* Top Wave Divider */
@@ -191,3 +178,14 @@ h1, h2, h3 {
 
 @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- THE MOBILE ZOOM FIX --- */
+/* This forces the phone to zoom in, matching the laptop's head-to-waist crop */
+@media (max-width: 768px) {
+    .hero {
+        background-size: 180% auto; 
+        
+        /* Shifted to 30% to pull the faces into the middle of the screen */
+        background-position: 30% top;
+    }
+}
