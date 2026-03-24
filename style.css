@@ -23,27 +23,28 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
-/* --- Hero Section & Photo Background --- */
-/* --- Hero Section & Photo Background --- */
+/* --- Hero Section & Bulletproof Photo Background --- */
 .hero {
     min-height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
     
-    /* Dark overlay (0.6 opacity) + the photo */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpg');
+    /* Fallback color just in case */
+    background-color: var(--primary-color); 
     
+    /* Dark overlay (0.6 opacity) + the photo */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpg');
     background-size: cover;
     
-    /* FIX 1: This tells the website to anchor the image to the top so their faces don't get cut off */
+    /* Anchors to the top to protect faces */
     background-position: center top; 
-    
-    /* FIX 2: We removed "background-attachment: fixed" to prevent mobile phones from heavily zooming in */
+    background-repeat: no-repeat;
     
     padding: 60px 20px;
     box-sizing: border-box;
 }
+
 /* Make sure text on the image is white and readable */
 .hero h1, 
 .hero h3, 
