@@ -21,32 +21,49 @@ body {
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
     font-weight: normal;
-    color: var(--primary-color);
 }
 
-/* --- Hero Section & Animated Background --- */
+/* --- Hero Section & Photo Background --- */
+/* --- Hero Section & Photo Background --- */
 .hero {
     min-height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(-45deg, #eae3db, #fdfbf7, #e2dcd3, #f4eee6);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    
+    /* Dark overlay (0.6 opacity) + the photo */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpg');
+    
+    background-size: cover;
+    
+    /* FIX 1: This tells the website to anchor the image to the top so their faces don't get cut off */
+    background-position: center top; 
+    
+    /* FIX 2: We removed "background-attachment: fixed" to prevent mobile phones from heavily zooming in */
+    
     padding: 60px 20px;
     box-sizing: border-box;
 }
+/* Make sure text on the image is white and readable */
+.hero h1, 
+.hero h3, 
+.person .full-name, 
+.person .parents, 
+.person .address {
+    color: #ffffff;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+}
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* Keep the 'And' symbol and Date in gold */
+.and-symbol h2, 
+.hero .date {
+    color: var(--accent-color);
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 
 .hero h3 {
     font-size: 1.2rem;
     margin-bottom: 20px;
-    color: #555;
 }
 
 /* --- Couple Section Formatting --- */
@@ -74,21 +91,19 @@ h1, h2, h3 {
 .person .full-name {
     font-weight: 700;
     font-size: 1.2rem;
-    color: var(--primary-color);
     margin: 5px 0;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .person .parents, .person .address {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin: 3px 0;
-    color: #666;
+    opacity: 0.9;
 }
 
 .and-symbol h2 {
     font-size: 3rem;
-    color: var(--accent-color);
     margin: 0;
 }
 
@@ -96,15 +111,18 @@ h1, h2, h3 {
     font-size: 1.4rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent-color);
     font-weight: bold;
     margin-top: 30px;
 }
 
-/* --- Layouts --- */
+/* --- Layouts for Lower Sections --- */
 .countdown-section, .details-section {
     padding: 80px 20px;
     background-color: #fff;
+}
+
+.countdown-section h2, .details-section h2, .detail-card h3 {
+    color: var(--primary-color);
 }
 
 .details-section { 
