@@ -1,6 +1,16 @@
+// --- 0. Preloader Logic ---
+// This waits until the page (and the heavy image) is fully loaded before revealing the site
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    
+    // Give it a tiny delay so people can actually appreciate the beautiful loading animation
+    setTimeout(function() {
+        preloader.classList.add('fade-out');
+    }, 1200);
+});
+
 // --- 1. Countdown Logic ---
 // Target: April 27, 2026 at 3:00 PM (15:00:00)
-// Note: JavaScript months are 0-indexed (0 = Jan, 1 = Feb, 2 = Mar, 3 = Apr)
 const weddingDate = new Date(2026, 3, 27, 15, 0, 0).getTime();
 
 const timer = setInterval(function() {
@@ -27,7 +37,6 @@ const timer = setInterval(function() {
 
 // --- 2. Scroll Animation Logic ---
 document.addEventListener('DOMContentLoaded', () => {
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
