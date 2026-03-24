@@ -1,37 +1,82 @@
-// --- 0. Preloader Logic ---
-// This waits until the page (and the heavy image) is fully loaded before revealing the site
+// --- 0. Premium Preloader Logic ---
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     
-    // Give it a tiny delay so people can actually appreciate the beautiful loading animation
+    // Increased delay to 3.5 seconds (3500ms) for a more luxurious reveal
     setTimeout(function() {
         preloader.classList.add('fade-out');
-    }, 1200);
+    }, 3500); 
 });
 
-// --- 1. Countdown Logic ---
-// Target: April 27, 2026 at 3:00 PM (15:00:00)
-const weddingDate = new Date(2026, 3, 27, 15, 0, 0).getTime();
+// --- 1. Dynamic Event & Countdown Logic ---
+// REAL Target 1: Holy Matrimony (April 27, 2026 at 3:00 PM)
+const ceremonyDate = new Date(2026, 3, 27, 15, 0, 0).getTime();
+
+// REAL Target 2: Wedding Reception (April 27, 2026 at 6:00 PM)
+const receptionDate = new Date(2026, 3, 27, 18, 0, 0).getTime();
+
+// "Locks" to make sure the confetti only fires exactly once per event
+let ceremonyTriggered = false;
+let receptionTriggered = false;
+
+// The Party Popper Function!
+function popConfetti() {
+    const defaults = { 
+        origin: { y: 0.7 }, 
+        colors: ['#c5a059', '#ffffff', '#1a1a1a'] // Champagne Gold, White, Charcoal
+    };
+    
+    // Left side cannon
+    confetti({
+        ...defaults,
+        particleCount: 150,
+        spread: 70,
+        origin: { x: 0 }
+    });
+    
+    // Right side cannon
+    confetti({
+        ...defaults,
+        particleCount: 150,
+        spread: 70,
+        origin: { x: 1 }
+    });
+}
 
 const timer = setInterval(function() {
     const now = new Date().getTime();
-    const distance = weddingDate - now;
+    const distanceToCeremony = ceremonyDate - now;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if (distanceToCeremony > 0) {
+        // Phase 1: Counting down
+        const days = Math.floor(distanceToCeremony / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distanceToCeremony % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distanceToCeremony % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distanceToCeremony % (1000 * 60)) / 1000);
 
-    // Update the HTML
-    document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-    document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
-
-    // Stop timer when it hits zero
-    if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById("countdown").innerHTML = "<h2>It's the Big Day!</h2>";
+        document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+        document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+        
+    } else {
+        // The countdown has reached zero
+        if (now >= receptionDate) {
+            // Phase 3: Reception Time!
+            clearInterval(timer);
+            if (!receptionTriggered) {
+                document.getElementById("countdown").innerHTML = "<h2 class='pop-out show'>Celebration mood on 🎉</h2>";
+                popConfetti();
+                receptionTriggered = true;
+            }
+        } else {
+            // Phase 2: Ceremony Time!
+            if (!ceremonyTriggered) {
+                document.getElementById("countdown").innerHTML = "<h2 class='pop-out show'>It's Happening Right Now ✨</h2>";
+                popConfetti();
+                ceremonyTriggered = true;
+            }
+        }
     }
 }, 1000);
 
@@ -44,10 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target); 
             }
         });
-    }, {
-        threshold: 0.05 
+    }, { 
+        threshold: 0.1 
     });
-
-    const hiddenElements = document.querySelectorAll('.hidden');
-    hiddenElements.forEach((el) => observer.observe(el));
+    
+    document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 });
