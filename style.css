@@ -64,7 +64,7 @@ h1, h2, h3 {
     background-color: var(--primary-color); 
     
     /* Using couple.jpeg exactly as you uploaded it */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('couple.jpg');
     
     /* Cover works perfectly on laptop to crop the legs */
     background-size: cover;
