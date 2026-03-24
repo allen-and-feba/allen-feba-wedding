@@ -90,7 +90,7 @@ h1, h2, h3 {
     justify-content: center;
     position: relative; 
     background-color: var(--primary-color); 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('couple.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('couple.jpg');
     background-size: cover;
     background-position: center top; 
     background-repeat: no-repeat;
