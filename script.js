@@ -2,10 +2,11 @@
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     
-    // Increased delay to 3.5 seconds (3500ms) for a more luxurious reveal
+    // Kept at 2000ms. The loading bar melts away, leaving the initials, 
+    // and seamlessly transitioning to the landing screen.
     setTimeout(function() {
         preloader.classList.add('fade-out');
-    }, 3500); 
+    }, 2000); 
 });
 
 // --- 1. Dynamic Event & Countdown Logic ---
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
+                // We unobserve so the animation only happens the first time they scroll down
                 observer.unobserve(entry.target); 
             }
         });
@@ -93,5 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.1 
     });
     
+    // This will now catch the new hidden elements in your hero section!
     document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 });
