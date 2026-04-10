@@ -112,18 +112,17 @@ h1, h2, h3 {
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
-    left: 0;           /* FIX: Start from the left edge */
-    width: 100%;       /* FIX: Span the entire width of the screen */
+    left: 0;
+    width: 100%;
     text-align: center;
     opacity: 0;
     animation: fadeIn 1s ease 3s forwards;
     z-index: 5;
-    /* We removed the transform property so it no longer fights the scroll animation! */
 }
 
 .hero-scroll {
-    bottom: 85px; /* Sits comfortably above the SVG wave */
-    animation: none; /* Relies on scroll reveal instead */
+    bottom: 85px; 
+    animation: none; 
 }
 
 .scroll-indicator p {
@@ -361,7 +360,17 @@ h1, h2, h3 {
 @media (max-width: 768px) {
     .premium-initials { font-size: 4rem; }
     .hero { background-size: cover; background-position: center center; }
-    .person h1 { font-size: 3.5rem; }
+    
+    /* NEW FIX: Creates a safe zone so the text never touches the absolute scroll indicator */
+    .hero-content { padding-bottom: 100px; }
+    
+    /* Tightens vertical gaps to fit phone screens better */
+    .couple-section { gap: 15px; margin: 20px 0; }
+    .hero .date { margin-top: 15px; }
+    
+    .person h1 { font-size: 3.2rem; }
+    .and-symbol h2 { font-size: 2.5rem; margin: 0; }
+    
     .verse-content blockquote { font-size: 1.8rem; }
     .tribute-text { font-size: 1.2rem; padding: 0; }
     .tribute-container { padding: 40px 20px; }
@@ -373,7 +382,6 @@ h1, h2, h3 {
 .hidden { 
     opacity: 0; 
     transform: translateY(40px); 
-    /* Using cubic-bezier for ultra-smooth, luxurious easing */
     transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 .show { 
