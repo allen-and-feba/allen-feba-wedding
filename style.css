@@ -112,12 +112,13 @@ h1, h2, h3 {
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;           /* FIX: Start from the left edge */
+    width: 100%;       /* FIX: Span the entire width of the screen */
     text-align: center;
     opacity: 0;
     animation: fadeIn 1s ease 3s forwards;
     z-index: 5;
+    /* We removed the transform property so it no longer fights the scroll animation! */
 }
 
 .hero-scroll {
