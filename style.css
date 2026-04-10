@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #1a1a1a; /* Midnight Charcoal */
-    --accent-color: #c5a059;  /* Champagne Gold */
-    --bg-color: #faf7f2;      /* Cream Silk */
+    --primary-color: #1a1a1a; 
+    --accent-color: #c5a059;  
+    --bg-color: #faf7f2;      
     --card-bg: #ffffff;
     --text-color: #333333;
 }
@@ -32,7 +32,7 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 1s;
 }
 
 #preloader.fade-out { opacity: 0; visibility: hidden; }
@@ -40,7 +40,7 @@ h1, h2, h3 {
 .loader-content { text-align: center; }
 
 .premium-initials {
-    font-size: 6rem; /* Significantly Larger */
+    font-size: 6rem; 
     color: #fff;
     margin: 0;
     letter-spacing: 12px;
@@ -82,7 +82,85 @@ h1, h2, h3 {
     margin-top: 10px;
 }
 
-/* --- Hero Section --- */
+/* --- Landing Section (Screen 1) --- */
+.landing-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    position: relative;
+    z-index: 10;
+}
+
+.landing-content { text-align: center; }
+.static-logo { animation: none; letter-spacing: 12px; } 
+
+.landing-date {
+    color: var(--accent-color);
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 2.2s forwards; 
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s ease 3s forwards;
+}
+
+.scroll-indicator p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid rgba(255,255,255,0.6);
+    border-radius: 13px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 6px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- Hero Section (Screen 2) --- */
 .hero {
     min-height: 100vh; 
     display: flex;
@@ -90,9 +168,9 @@ h1, h2, h3 {
     justify-content: center;
     position: relative; 
     background-color: var(--primary-color); 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('couple.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('couple.jpg');
     background-size: cover;
-    background-position: center top; 
+    background-position: center 30%; 
     background-repeat: no-repeat;
     padding: 60px 20px 100px 20px; 
     box-sizing: border-box;
@@ -111,7 +189,6 @@ h1, h2, h3 {
 }
 
 .and-symbol h2, .hero .date { color: var(--accent-color); }
-
 .hero h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; opacity: 0.9; }
 
 .couple-section { display: flex; flex-direction: column; gap: 30px; margin: 40px 0; }
@@ -174,7 +251,7 @@ h1, h2, h3 {
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    border-radius: 0; /* Premium Flat Look */
+    border-radius: 0; 
     transition: all 0.3s ease;
 }
 
@@ -184,14 +261,101 @@ h1, h2, h3 {
 .cal-btn { border: 1px solid var(--accent-color); color: var(--accent-color); }
 .cal-btn:hover { background: var(--accent-color); color: #fff; }
 
+/* --- NEW: Parents Tribute Section --- */
+.parents-tribute-section {
+    padding: 80px 20px 120px;
+    background-color: var(--bg-color);
+}
+
+.tribute-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    padding: 60px 40px;
+    border: 1px solid var(--accent-color);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.tribute-container::before, .tribute-container::after {
+    content: '✧';
+    position: absolute;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.tribute-container::before { top: 15px; left: 20px; }
+.tribute-container::after { bottom: 15px; right: 20px; }
+
+.tribute-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--primary-color);
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.parents-names {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .parents-names {
+        flex-direction: row;
+        gap: 60px;
+    }
+}
+
+.parents-group { text-align: center; }
+
+.parents-title {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+}
+
+.parents-names-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.parents-divider {
+    width: 50px;
+    height: 1px;
+    background: var(--accent-color);
+    opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+    .parents-divider {
+        width: 1px;
+        height: 50px;
+    }
+}
+
 /* --- Mobile Fixes --- */
 @media (max-width: 768px) {
     .premium-initials { font-size: 4rem; }
-    .hero { background-size: 150% auto; background-position: center 15%; }
+    .hero { background-size: cover; background-position: center center; }
     .person h1 { font-size: 3.5rem; }
     .verse-content blockquote { font-size: 1.8rem; }
+    .tribute-text { font-size: 1.2rem; padding: 0; }
+    .tribute-container { padding: 40px 20px; }
 }
 
+/* Base animations */
 .hidden { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
 .show { opacity: 1; transform: translateY(0); }
 .delay-1 { transition-delay: 0.2s; }
